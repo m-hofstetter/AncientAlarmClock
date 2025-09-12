@@ -1,13 +1,19 @@
+import wave
 import subprocess
-import shlex
+from piper import PiperVoice
 
-def say_de(text: str, speed_wpm=160, pitch=40, volume=80):
-    # -v de  -> German voice
-    # -s     -> speed (words per minute)
-    # -p     -> pitch (0–99)
-    # -a     -> volume/amplitude (0–200)
-    cmd = f'espeak-ng -v de -s {speed_wpm} -p {pitch} -a {volume} {shlex.quote(text)}'
-    subprocess.run(cmd, shell=True, check=True)
+# 1) Load the voice once
+voice = PiperVoice.load("../voices/de_DE-thorsten-high.onnx")
 
-if __name__ == "__main__":
-    say_de("Hallo! Ich spreche Deutsch auf deinem Raspberry Pi.")
+print('Geladen')
+
+def say(text: str, filename="out.wav"):
+    """Generate speech with Piper and save it to a WAV file, then play it."""
+    with wave.open(filename, "wb") as wf:
+        voice.synthesize_wav(text, wf)
+
+    # 2) Play the WAV file with ALSA
+    subprocess.run(["aplay", filename])
+
+# Example:
+say("Guten Morgen! Ich bin Piper und spreche jetzt direkt über die Datei.")
