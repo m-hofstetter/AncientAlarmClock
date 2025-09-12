@@ -7,7 +7,7 @@ import busio
 
 from adafruit_ht16k33 import segments
 
-class SevenSegmentClock:
+class SevenSegment:
     def __init__(self):
         i2c = busio.I2C(board.SCL, board.SDA)
         self.__display = segments.Seg7x4(i2c, address=0x72)
