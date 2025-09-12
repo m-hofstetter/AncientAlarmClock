@@ -1,3 +1,6 @@
+import threading
+from time import sleep
+
 import board, neopixel, time, math, colorsys
 
 PIXEL_PIN = board.D16
@@ -6,6 +9,8 @@ NUM_PIXELS = 56
 class Neopixels:
     def __init__(self):
         self.pixels = neopixel.NeoPixel(PIXEL_PIN, NUM_PIXELS, brightness=1, auto_write=False)
+        self.__running = False
+        self.__thread = None
 
     def __scaled_sin(self, x, average, amplitude, period):
         return average + amplitude/2 * math.sin(x * 1/period)
@@ -32,4 +37,21 @@ class Neopixels:
     def green_oscillate_update_all_pixels(self):
         for i in range(NUM_PIXELS):
             self.pixels[i] = self.__green_oscillate_per_pixel(i)
+        self.pixels.show()
+
+    def __ambient_light_thread(self):
+        while self.__running:
+            self.green_oscillate_update_all_pixels()
+            sleep(0.01)
+
+    def start(self):
+        self.__running = True
+        self.__thread = threading.Thread(target=self.__ambient_light_thread)
+        self.__thread.start()
+
+    def stop(self):
+        self.__running = False
+        if self.__thread is not None:
+            self.__thread.join()
+        self.pixels.fill((0, 0, 0))
         self.pixels.show()
