@@ -21,9 +21,8 @@ class Display:
         self._init_display()
 
     def _init_display(self):
-        for attempt in range(MAX_CONNECTION_TRIES):  # try twice
+        for attempt in range(MAX_CONNECTION_TRIES):
             try:
-                # give mux channel time to settle
                 self.__oled = adafruit_ssd1306.SSD1306_I2C(
                     OLED_WIDTH, OLED_HEIGHT, self.__i2c,
                     addr=DISPLAY_I2C_ADDRESS
@@ -31,7 +30,7 @@ class Display:
                 return
             except Exception as e:
                 if attempt == MAX_CONNECTION_TRIES:
-                    raise e  # wait a bit and retry
+                    raise e
                 else:
                     sleep(0.05)
 
