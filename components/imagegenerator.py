@@ -29,11 +29,7 @@ HIEROGLYPHS = {
 def generate_image(text, font):
     img = Image.new("1", (OLED_WIDTH, OLED_HEIGHT))
     draw = ImageDraw.Draw(img)
-
-    _, _, w, h = draw.textbbox((0, 0), text=text, font=font)
-    x = (OLED_WIDTH - w) * 0.5
-    y = (OLED_HEIGHT - h) * 0.5
-    draw.text((x, y), text, font=font, fill="white")
+    draw.text((OLED_WIDTH/2, OLED_HEIGHT/2), text, font=font, fill="white", anchor="mm")
     return img
 
 
