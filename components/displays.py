@@ -6,7 +6,7 @@ import board
 import busio
 from board import I2C
 
-from components.imagegenerator import ImageGenerator, CLEAR
+from components.imagegenerator import ImageGenerator, CLEAR, HIEROGLYPHS
 
 DISPLAY_I2C_ADDRESS = 0x3C
 OLED_WIDTH, OLED_HEIGHT = 128, 64
@@ -45,6 +45,11 @@ class Display:
         self.__oled.image(CLEAR)
         self.__oled.show()
 
+    def show_hieroglyph(self, glyph):
+        img = self.__text_image_generator.generate_hieroglyph(glyph)
+        self.__oled.image(img)
+        self.__oled.show()
+
 
 class DummyDisplay:
 
@@ -56,6 +61,9 @@ class DummyDisplay:
 
     def clear(self):
         print(f"Dummy display {self.__number} clear")
+
+    def show_hieroglyph(self, glyph):
+        print(f"Dummy display {self.__number} show hieroglyph {HIEROGLYPHS[glyph]}")
 
 
 i2c = busio.I2C(board.SCL, board.SDA)
