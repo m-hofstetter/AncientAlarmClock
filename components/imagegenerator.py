@@ -29,7 +29,16 @@ HIEROGLYPHS = {
 def generate_image(text, font):
     img = Image.new("1", (OLED_WIDTH, OLED_HEIGHT))
     draw = ImageDraw.Draw(img)
-    draw.text((OLED_WIDTH/2, OLED_HEIGHT/2), text, font=font, fill="white", anchor="mm")
+
+    x0, y0, x1, y1 = draw.textbbox((0, 0), text, font=font)
+    text_width = x1 - x0
+    text_height = y1 - y0
+
+    target_x = (OLED_WIDTH - text_width) / 2 - x0
+    target_y = (OLED_HEIGHT - text_height) / 2 - y0
+
+    draw.text((target_x, target_y), text, font=font, fill="white")
+
     return img
 
 
@@ -40,7 +49,7 @@ class ImageGenerator:
         except OSError:
             self.latin_font = ImageFont.load_default(size)
         try:
-            self.glyph_font = ImageFont.truetype("NotoSansEgyptianHieroglyphs-Regular.ttf", 36)
+            self.glyph_font = ImageFont.truetype("NotoSansEgyptianHieroglyphs-Regular.ttf", 40)
         except OSError:
             self.glyph_font = ImageFont.load_default(size)
 
