@@ -19,6 +19,7 @@ class Display:
     def __init__(self, i2c: I2C):
         self.__i2c = i2c
         self.__text_image_generator = ImageGenerator()
+        self.__oled = None
         self._init_display()
 
     def _init_display(self):
@@ -30,10 +31,10 @@ class Display:
                 )
                 return
             except Exception as e:
-                if attempt == MAX_CONNECTION_TRIES:
+                if attempt + 1 == MAX_CONNECTION_TRIES:
                     raise e
                 else:
-                    sleep(0.05)
+                    sleep(0.02 + 0.01 * attempt)
 
     def show_text(self, text):
         img = self.__text_image_generator.generate_text_image(text)
@@ -57,8 +58,6 @@ DISPLAYS = [
     Display(MULTIPLEXERS[0][4]),
     Display(MULTIPLEXERS[0][5]),
     Display(MULTIPLEXERS[0][6]),
-    Display(MULTIPLEXERS[0][2]),
-    Display(MULTIPLEXERS[0][1]),
     Display(MULTIPLEXERS[0][0]),
     Display(MULTIPLEXERS[0][7]),
     Display(MULTIPLEXERS[1][5]),
