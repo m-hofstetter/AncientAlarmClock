@@ -1,3 +1,5 @@
+from time import sleep
+
 import adafruit_ssd1306
 import adafruit_tca9548a
 import board
@@ -9,12 +11,29 @@ from components.imagegenerator import ImageGenerator
 DISPLAY_I2C_ADDRESS = 0x3C
 OLED_WIDTH, OLED_HEIGHT = 128, 64
 
+MAX_CONNECTION_TRIES = 5
 
 class Display:
 
     def __init__(self, i2c: I2C):
-        self.__oled = adafruit_ssd1306.SSD1306_I2C(OLED_WIDTH, OLED_HEIGHT, i2c, addr=DISPLAY_I2C_ADDRESS)
+        self.__i2c = i2c
         self.__text_image_generator = ImageGenerator()
+        self._init_display()
+
+    def _init_display(self):
+        for attempt in range(MAX_CONNECTION_TRIES):  # try twice
+            try:
+                # give mux channel time to settle
+                self.__oled = adafruit_ssd1306.SSD1306_I2C(
+                    OLED_WIDTH, OLED_HEIGHT, self.__i2c,
+                    addr=DISPLAY_I2C_ADDRESS
+                )
+                return
+            except Exception as e:
+                if attempt == MAX_CONNECTION_TRIES:
+                    raise e  # wait a bit and retry
+                else:
+                    sleep(0.05)
 
     def show_text(self, text):
         img = self.__text_image_generator.generate_text_image(text)
