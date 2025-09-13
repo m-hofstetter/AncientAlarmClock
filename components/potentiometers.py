@@ -10,6 +10,9 @@ def map_range(value, from_min, from_max, to_min, to_max):
     mapped_value = to_min + (normalized * (to_max - to_min))
     return mapped_value
 
+def map_value(x, in_min=0.0, in_max=3.305, out_min=0.0, out_max=100.0):
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+
 class Potentiometers:
     def __init__(self):
         i2c = busio.I2C(board.SCL, board.SDA)
@@ -27,3 +30,7 @@ class Potentiometers:
             case 2:
                 return self.__ch2.voltage
         return None
+
+    def get_percent(self, channel):
+        raw_value = self.get_value(channel)
+        return map_value(raw_value)
