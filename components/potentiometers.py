@@ -14,16 +14,16 @@ class Potentiometers:
     def __init__(self):
         i2c = busio.I2C(board.SCL, board.SDA)
         ads = ADS.ADS1115(i2c, address=0x48)
-        self.ch0 = AnalogIn(ads, ADS.P0)
-        self.ch1 = AnalogIn(ads, ADS.P1)
-        self.ch2 = AnalogIn(ads, ADS.P2)
+        self.__ch0 = AnalogIn(ads, ADS.P0)
+        self.__ch1 = AnalogIn(ads, ADS.P1)
+        self.__ch2 = AnalogIn(ads, ADS.P2)
 
     def get_value(self, channel):
         match (channel):
             case 0:
-                return self.ch0.voltage
+                return self.__ch0.voltage
             case 1:
-                return self.ch1.voltage
+                return self.__ch1.voltage
             case 2:
-                return self.ch2.voltage
+                return self.__ch2.voltage
         return None
