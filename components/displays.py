@@ -33,11 +33,11 @@ HIEROGLYPHS = {
 class Display:
     def __init__(self, multiplexer, channel):
         self.bus = smbus2.SMBus(1)
-        i2c = busio.I2C(board.SCL, board.SDA)
-        self.oled = adafruit_ssd1306.SSD1306_I2C(OLED_WIDTH, OLED_HEIGHT, i2c, addr=DISPLAY_I2C_ADDRESS)
         self.multiplexer = multiplexer
         self.channel = channel
         self.bus.write_byte(self.multiplexer, 1 << self.channel)
+        i2c = busio.I2C(board.SCL, board.SDA)
+        self.oled = adafruit_ssd1306.SSD1306_I2C(OLED_WIDTH, OLED_HEIGHT, i2c, addr=DISPLAY_I2C_ADDRESS)
 
     def __deselect_all_channels(self):
         for m in MULTIPLEXERS:
