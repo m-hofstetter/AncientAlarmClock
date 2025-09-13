@@ -46,6 +46,18 @@ class Display:
         self.__oled.show()
 
 
+class DummyDisplay:
+
+    def __init__(self, number):
+        self.__number = number
+
+    def show_text(self, text):
+        print(f"Dummy display {self.__number} show text {text}")
+
+    def clear(self):
+        print(f"Dummy display {self.__number} clear")
+
+
 i2c = busio.I2C(board.SCL, board.SDA)
 
 MULTIPLEXERS = [
@@ -60,6 +72,8 @@ DISPLAYS = [
     Display(MULTIPLEXERS[0][6]),
     Display(MULTIPLEXERS[0][0]),
     Display(MULTIPLEXERS[0][7]),
+    DummyDisplay(4), # Display or multiplexer is somehow defective
+    DummyDisplay(5), # Display or multiplexer is somehow defective
     Display(MULTIPLEXERS[1][5]),
     Display(MULTIPLEXERS[1][6]),
     Display(MULTIPLEXERS[1][3])
