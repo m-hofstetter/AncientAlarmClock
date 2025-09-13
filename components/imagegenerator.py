@@ -3,6 +3,8 @@ from PIL import Image, ImageFont, ImageDraw
 OLED_WIDTH = 128
 OLED_HEIGHT = 64
 
+CLEAR = Image.new("1", (OLED_WIDTH, OLED_HEIGHT))
+
 class ImageGenerator:
     def __init__(self, font="DejaVuSans.ttf", size=12):
         try:
