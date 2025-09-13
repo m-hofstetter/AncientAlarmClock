@@ -17,12 +17,21 @@ HIEROGLYPHS = {
     "Cobra": "𓆗",
     "Reed_leaf": "𓇋",
     "Sun_disk": "𓇳",
-    "Water_lines": "𓈗",
+    "Water": "𓈗",
     "Placenta": "𓐍",
     "Sickle": "𓌳",
     "Penis": "𓂸",
     "Elephant": "𓃰",
-    "Scarab": "𓆣"
+    "Scarab": "𓆣",
+    "Hand": "𓂧",
+    "Eye": "𓂀",
+    "Pillar": "𓊽",
+    "Ankh": "𓋹",
+    "Fish": "𓆛",
+    "Goose": "𓅭",
+    "Turtle": "𓆉",
+    "Falcon": "𓅃",
+    "Star": "𓇼"
 }
 
 
