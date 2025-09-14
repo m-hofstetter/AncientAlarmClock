@@ -10,11 +10,10 @@ os.environ["OPENBLAS_NUM_THREADS"] = "1"
 
 voice = PiperVoice.load("../voices/de_DE-thorsten-medium.onnx")
 
-LOCAL = True # Whether to use a local TTS (Piper) or online (gTTS)
 
-def generate_speech(text: str):
+def generate_speech(text: str, local=False):
 
-    if LOCAL:
+    if local:
         filename = f"../generated_speech/{uuid.uuid4()}.wav"
         with wave.open(filename, "wb") as wf:
             voice.synthesize_wav(text, wf)
