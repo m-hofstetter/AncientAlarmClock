@@ -1,14 +1,13 @@
 import random
 from signal import pause
 from gpiozero import Button
-import pygame
 
 from components.buttons import TOGGLE_SWITCHES
 from components.displays import Display, DISPLAYS
 from components.neopixels import NEOPIXELS
 from components.speaker import SUCCESS_SOUND
 
-CHECKMARK_PATH = "../assets/checkmark.png"
+CHECKMARK_PATH = "./assets/checkmark.png"
 
 
 class LightsOut:
@@ -75,8 +74,3 @@ def create_wiring() -> list[list[bool]]:
     rng.shuffle(p)
     M = [[base[p[i]][p[j]] for j in range(4)] for i in range(4)]
     return M
-
-
-i = LightsOut('Owl', ['Lion', 'Man_standing', 'Elephant', 'Scarab'], TOGGLE_SWITCHES[:4], DISPLAYS[:4])
-i.start()
-pause()
