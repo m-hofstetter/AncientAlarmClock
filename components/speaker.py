@@ -30,7 +30,8 @@ def generate_speech(text: str, local=False):
     return filename
 
 def say(filename):
-    subprocess.run(["ffplay", "-nodisp", "-autoexit", filename])
+    sound = pygame.mixer.Sound(filename)
+    sound.play()
 
 def generate_and_say(text):
     say(generate_speech(text))
