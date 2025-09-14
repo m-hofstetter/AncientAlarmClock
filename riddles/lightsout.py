@@ -1,4 +1,5 @@
 import random
+
 from gpiozero import Button
 
 from components.displays import Display
@@ -7,6 +8,7 @@ from components.speaker import SUCCESS_SOUND, say, generate_speech
 
 CHECKMARK_PATH = "./assets/checkmark.png"
 PROPABILITY_COMMENT_ON_FAIL = 0.35
+
 
 class LightsOut:
     def __init__(
@@ -39,7 +41,7 @@ class LightsOut:
         if self.is_solved():
             self.handle_solved()
         else:
-            if random.random() < PROPABILITY_COMMENT_ON_FAIL: #
+            if random.random() < PROPABILITY_COMMENT_ON_FAIL:  #
                 say(random.choice(self.on_fail))
 
     def update_display(self, display_number):
@@ -74,6 +76,7 @@ class LightsOut:
         say(self.on_solve)
         NEOPIXELS.start_sine_blink_and_sleep((100, 255, 0), 6, 0.2)
         NEOPIXELS.start_continuous(0.3)
+
 
 def create_wiring() -> list[list[bool]]:
     rng = random.Random()

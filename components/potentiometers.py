@@ -1,17 +1,18 @@
-import time
-
 import adafruit_ads1x15.ads1115 as ADS
-from adafruit_ads1x15.analog_in import AnalogIn
 import board
 import busio
+from adafruit_ads1x15.analog_in import AnalogIn
+
 
 def map_range(value, from_min, from_max, to_min, to_max):
     normalized = (value - from_min) / (from_max - from_min)
     mapped_value = to_min + (normalized * (to_max - to_min))
     return mapped_value
 
+
 def map_value(x, in_min=0.0, in_max=3.305, out_min=0.0, out_max=100.0):
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+
 
 class Potentiometers:
     def __init__(self):

@@ -18,7 +18,6 @@ class LightsOutRequest(BaseModel):
 
 @app.post("/lights_out")
 async def say_hello(body: LightsOutRequest):
-
     l = LightsOut(
         body.correctGlyph,
         body.incorrectGlyph,

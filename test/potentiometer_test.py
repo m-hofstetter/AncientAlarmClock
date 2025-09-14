@@ -1,8 +1,5 @@
-from time import sleep
-
 from components.displays import DISPLAYS
 from components.potentiometers import Potentiometers
-
 
 pots = Potentiometers()
 

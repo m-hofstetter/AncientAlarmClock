@@ -4,8 +4,8 @@ from time import sleep
 
 import board
 import busio
-
 from adafruit_ht16k33 import segments
+
 
 class SevenSegment:
     def __init__(self):

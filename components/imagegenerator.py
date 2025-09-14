@@ -5,7 +5,6 @@ OLED_HEIGHT = 64
 
 CLEAR = Image.new("1", (OLED_WIDTH, OLED_HEIGHT))
 
-
 HIEROGLYPHS = {
     "Man_standing": "𓀀",
     "Seated_woman": "𓀁",

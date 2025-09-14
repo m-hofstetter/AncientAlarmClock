@@ -2,7 +2,11 @@ import threading
 from time import sleep
 from typing import Callable
 
-import board, neopixel, time, math, colorsys
+import board
+import colorsys
+import math
+import neopixel
+import time
 
 PIXEL_PIN = board.D16
 NUM_PIXELS = 56
@@ -93,6 +97,7 @@ class Neopixels:
     def start_sine_blink_and_sleep(self, color=(255, 255, 255), times: int = 4, duration: float = 0.1):
         self.start_sine_blink(color, times, duration)
         sleep(duration * times)
+
 
 NEOPIXELS = Neopixels()
 

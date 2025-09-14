@@ -1,4 +1,3 @@
-from os import PathLike
 from time import sleep
 
 import adafruit_ssd1306
@@ -91,8 +90,8 @@ DISPLAYS = [
     Display(MULTIPLEXERS[0][0]),
     Display(MULTIPLEXERS[0][7]),
     # Weird hardware issue. These displays are sometimes defective
-    Display(MULTIPLEXERS[0][2]), # DummyDisplay(4),
-    Display(MULTIPLEXERS[0][1]), # DummyDisplay(5),
+    Display(MULTIPLEXERS[0][2]),  # DummyDisplay(4),
+    Display(MULTIPLEXERS[0][1]),  # DummyDisplay(5),
     Display(MULTIPLEXERS[1][5]),
     Display(MULTIPLEXERS[1][6]),
     Display(MULTIPLEXERS[1][3])

@@ -1,6 +1,6 @@
 from time import sleep
 
-from components.speaker import generate_and_say, generate_speech
+from components.speaker import generate_speech
 
 '''
 I dont have the official Raspberry Pi 5 PSU available. If I run piper unrestricted on full power, the Raspi dies due to
