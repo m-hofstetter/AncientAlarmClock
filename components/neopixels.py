@@ -90,6 +90,11 @@ class Neopixels:
         )
         self.__thread.start()
 
+    def start_sine_blink_and_sleep(self, color=(255, 255, 255), times: int = 4, duration: float = 0.1):
+        self.start_sine_blink(color, times, duration)
+        sleep(duration * times)
+
+NEOPIXELS = Neopixels()
 
 if __name__ == "__main__":
     n = Neopixels()
