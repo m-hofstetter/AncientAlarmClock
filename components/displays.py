@@ -52,7 +52,7 @@ class Display:
         self.__oled.image(img)
         self.__oled.show()
 
-    def show_asset(self, asset: PathLike[str]):
+    def show_asset(self, asset):
         img = Image.open(asset).convert("1")
         self.__oled.image(img)
         self.__oled.show()

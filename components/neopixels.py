@@ -47,6 +47,7 @@ class Neopixels:
             sleep(0.01)
 
     def start_continuous(self, color=0.5):
+        self.stop()
         self.__running = True
         self.__thread = threading.Thread(
             target=lambda: self.__continuous_light_thread(
