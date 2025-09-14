@@ -57,6 +57,7 @@ class Display:
         self.__oled.image(img)
         self.__oled.show()
 
+
 class DummyDisplay:
 
     def __init__(self, number):
@@ -89,8 +90,9 @@ DISPLAYS = [
     Display(MULTIPLEXERS[0][6]),
     Display(MULTIPLEXERS[0][0]),
     Display(MULTIPLEXERS[0][7]),
-    DummyDisplay(4), # Display or multiplexer is somehow defective
-    DummyDisplay(5), # Display or multiplexer is somehow defective
+    # Weird hardware issue. These displays are sometimes defective
+    Display(MULTIPLEXERS[0][2]), # DummyDisplay(4),
+    Display(MULTIPLEXERS[0][1]), # DummyDisplay(5),
     Display(MULTIPLEXERS[1][5]),
     Display(MULTIPLEXERS[1][6]),
     Display(MULTIPLEXERS[1][3])
