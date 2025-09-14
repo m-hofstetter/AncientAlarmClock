@@ -1,9 +1,7 @@
-# Test your FastAPI endpoints
-
-GET http://127.0.0.1:8000/
+POST http://192.168.188.97:8000/lights_out
 Accept: application/json
-###
 
-GET http://127.0.0.1:8000/hello/User
-Accept: application/json
-###
+{
+    "correctGlyph": "Ankh",
+    "incorrectGlyph": ["Fish", "Goose", "Turtle", "Falcon"]
+}
