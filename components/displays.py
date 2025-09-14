@@ -1,9 +1,11 @@
+from os import PathLike
 from time import sleep
 
 import adafruit_ssd1306
 import adafruit_tca9548a
 import board
 import busio
+from PIL import Image
 from board import I2C
 
 from components.imagegenerator import ImageGenerator, CLEAR, HIEROGLYPHS
@@ -50,6 +52,10 @@ class Display:
         self.__oled.image(img)
         self.__oled.show()
 
+    def show_asset(self, asset: PathLike[str]):
+        img = Image.open(asset).convert("1")
+        self.__oled.image(img)
+        self.__oled.show()
 
 class DummyDisplay:
 
@@ -64,6 +70,9 @@ class DummyDisplay:
 
     def show_hieroglyph(self, glyph):
         print(f"Dummy display {self.__number} show hieroglyph {HIEROGLYPHS[glyph]}")
+
+    def show_asset(self, asset):
+        print(f"Dummy display {self.__number} show asset {asset}")
 
 
 i2c = busio.I2C(board.SCL, board.SDA)
