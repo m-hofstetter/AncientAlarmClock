@@ -57,10 +57,38 @@ class Neopixels:
 
     def stop(self):
         self.__running = False
-        if self.__thread is not None:
+        if self.__thread is not None and self.__thread.is_alive():
             self.__thread.join()
+        self.__thread = None
         self.pixels.fill((0, 0, 0))
         self.pixels.show()
+
+    def __sine_blink_thread(self, color=(255, 255, 255), times: int = 3, duration: float = 1.0):
+        r, g, b = color
+        steps = 100
+        delay = duration / steps
+
+        for _ in range(times):
+            for i in range(steps):
+                if not self.__running:
+                    break
+                brightness = (math.sin(math.pi * i / steps)) ** 2
+                self.pixels.fill((
+                    int(r * brightness),
+                    int(g * brightness),
+                    int(b * brightness)
+                ))
+                self.pixels.show()
+                sleep(delay)
+        self.__running = False
+
+    def start_sine_blink(self, color=(255, 255, 255), times: int = 4, duration: float = 0.1):
+        self.stop()
+        self.__running = True
+        self.__thread = threading.Thread(
+            target=lambda: self.__sine_blink_thread(color=color, times=times, duration=duration)
+        )
+        self.__thread.start()
 
 
 if __name__ == "__main__":
