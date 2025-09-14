@@ -11,6 +11,9 @@ app = FastAPI()
 class LightsOutRequest(BaseModel):
     correctGlyph: str
     incorrectGlyph: list[str]
+    introduction: str
+    onFail: list[str]
+    onSolve: str
 
 
 @app.post("/lights_out")
@@ -20,7 +23,10 @@ async def say_hello(body: LightsOutRequest):
         body.correctGlyph,
         body.incorrectGlyph,
         TOGGLE_SWITCHES,
-        DISPLAYS[:4]
+        DISPLAYS[:4],
+        body.introduction,
+        body.onFail,
+        body.onSolve
     )
     l.start()
 
